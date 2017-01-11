@@ -11,7 +11,7 @@ import { ExampleApp } from "./main/example-app";
     <div class="ui container">
       <a href="#" class="header item">
         <img class="logo" 
-             src="" />
+             src="${require('assets/images/logos/ng-book-2-minibook.png')}" />
         ng-book 2
       </a>
       <div class="header item borderless">
