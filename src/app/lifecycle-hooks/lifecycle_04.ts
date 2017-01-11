@@ -27,11 +27,11 @@ import { CommonModule } from '@angular/common';
 })
 class OnInitCmp implements OnInit, OnDestroy {
   ngOnInit(): void {
-    console.log('On init');
+    console.log('OnInitCmp - On init');
   }
 
   ngOnDestroy(): void {
-    console.log('On destroy');
+    console.log('OnInitCmp - On destroy');
   }
 }
 
@@ -41,7 +41,7 @@ class OnInitCmp implements OnInit, OnDestroy {
   <div class="ui comments">
     <div class="comment">
       <a class="avatar">
-        <img src="/app/images/avatars/matt.jpg">
+        <img src="assets/images/avatars/matt.jpg">
       </a>
       <div class="content">
         <a class="author">{{name}}</a>
@@ -53,12 +53,16 @@ class OnInitCmp implements OnInit, OnDestroy {
   </div>
   `
 })
-class OnChangeCmp implements OnChanges {
+class OnChangeCmp implements OnChanges, DoCheck {
   @Input('name') name: string;
   @Input('comment') comment: string;
 
   ngOnChanges(changes: {[propName: string]: SimpleChange}): void {
-    console.log('Changes', changes);
+    console.log('OnChangeCmp - Changes', changes);
+  }
+
+  ngDoCheck(): void {
+    console.log('OnChangeCmp - DoCheck');
   }
 }
 
@@ -69,7 +73,7 @@ class OnChangeCmp implements OnChanges {
   <div class="ui feed">
     <div class="event">
       <div class="label" *ngIf="comment.author">
-        <img src="/app/images/avatars/{{comment.author.toLowerCase()}}.jpg">
+        <img src="assets/images/avatars/{{comment.author.toLowerCase()}}.jpg">
       </div>
       <div class="content">
         <div class="summary">
@@ -110,8 +114,9 @@ class DoCheckItem implements DoCheck {
   }
 
   ngDoCheck() {
-    var changes = this.differ.diff(this.comment);
+    let changes = this.differ.diff(this.comment);
 
+    console.log("DoCheckItem - DoCheck");
     if (changes) {
       changes.forEachAddedItem(r => this.logChange('added', r));
       changes.forEachRemovedItem(r => this.logChange('removed', r));
@@ -121,13 +126,13 @@ class DoCheckItem implements DoCheck {
 
   logChange(action, r) {
     if (action === 'changed') {
-      console.log(r.key, action, 'from', r.previousValue, 'to', r.currentValue);
+      console.log("DoCheckItem - " + r.key, action, 'from', r.previousValue, 'to', r.currentValue);
     }
     if (action === 'added') {
-      console.log(action, r.key, 'with', r.currentValue);
+      console.log("DoCheckItem - " + action, r.key, 'with', r.currentValue);
     }
     if (action === 'removed') {
-      console.log(action, r.key, '(was ' + r.previousValue + ')');
+      console.log("DoCheckItem - " + action, r.key, '(was ' + r.previousValue + ')');
     }
   }
 
@@ -177,20 +182,20 @@ class DoCheckCmp implements DoCheck {
     this.addComment();
   }
 
-  getRandomInt(max: number): number {
+  static getRandomInt(max: number): number {
     return Math.floor(Math.random() * (max + 1));
   }
 
-  getRandomItem(array: string[]): string {
-    let pos: number = this.getRandomInt(array.length - 1);
+  static getRandomItem(array: string[]): string {
+    let pos: number = DoCheckCmp.getRandomInt(array.length - 1);
     return array[pos];
   }
 
   addComment(): void {
     this.comments.push({
-      author: this.getRandomItem(this.authors),
-      comment: this.getRandomItem(this.texts),
-      likes: this.getRandomInt(20)
+      author: DoCheckCmp.getRandomItem(this.authors),
+      comment: DoCheckCmp.getRandomItem(this.texts),
+      likes: DoCheckCmp.getRandomInt(20)
     });
   }
 
@@ -200,11 +205,12 @@ class DoCheckCmp implements DoCheck {
   }
 
   ngDoCheck(): void {
-    var changes = this.differ.diff(this.comments);
+    let changes = this.differ.diff(this.comments);
 
+    console.log("DoCheckCmp - DoCheck");
     if (changes) {
-      changes.forEachAddedItem(r => console.log('Added', r.item));
-      changes.forEachRemovedItem(r => console.log('Removed', r.item));
+      changes.forEachAddedItem(r => console.log("DoCheckCmp - " + 'Added', r.item));
+      changes.forEachRemovedItem(r => console.log("DoCheckCmp - " + 'Removed', r.item));
     }
   }
 }

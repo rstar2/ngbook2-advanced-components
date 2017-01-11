@@ -2,7 +2,8 @@ import {
   Component,
   Input,
   ChangeDetectorRef,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  OnInit
 } from '@angular/core';
 
 import { Observable } from 'rxjs/Rx';
@@ -13,26 +14,40 @@ import { Observable } from 'rxjs/Rx';
   template: `
   <div>
     <div>Total items: {{counter}}</div>
+    <div>Total items (from timer): {{counterFromTimer}}</div>
   </div>
   `
 })
-export class ObservableCmp {
+export class ObservableCmp implements OnInit {
   @Input() items: Observable<number>;
   counter = 0;
+  counterFromTimer = 0;
 
   constructor(private changeDetector: ChangeDetectorRef) {
   }
 
   ngOnInit() {
-    this.items.subscribe((v) => {
-      console.log('got value', v);
-      this.counter++;
-      if (this.counter % 5 == 0) {
-        this.changeDetector.markForCheck();
+    // this.items.subscribe((v) => {
+    //   console.log('got value', v);
+    //   this.counter++;
+    //   if (this.counter % 5 == 0) {
+    //     this.changeDetector.markForCheck();
+    //   }
+    // }, null, () => {
+    //   this.changeDetector.markForCheck();
+    // });
+
+    // the same works with normal timeouts
+    const interval = setInterval(()=> {
+      this.counterFromTimer++;
+      if (this.counterFromTimer % 5 == 0) {
+         this.changeDetector.markForCheck();
       }
-    }, null, () => {
-      this.changeDetector.markForCheck();
-    });
+
+      if (this.counterFromTimer > 100) {
+        clearInterval(interval);
+      }
+    }, 100)
   }
 }
 

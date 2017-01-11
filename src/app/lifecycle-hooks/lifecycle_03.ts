@@ -37,7 +37,7 @@ class OnInitCmp implements OnInit, OnDestroy {
   <div class="ui comments">
     <div class="comment">
       <a class="avatar">
-        <img src="/app/images/avatars/matt.jpg">
+        <img src="assets/images/avatars/matt.jpg">
       </a>
       <div class="content">
         <a class="author">{{name}}</a>
@@ -65,7 +65,7 @@ class OnChangeCmp implements OnChanges {
   <div class="ui feed">
     <div class="event">
       <div class="label" *ngIf="comment.author">
-        <img src="/app/images/avatars/{{comment.author.toLowerCase()}}.jpg">
+        <img src="assets/images/avatars/{{comment.author.toLowerCase()}}.jpg">
       </div>
       <div class="content">
         <div class="summary">
