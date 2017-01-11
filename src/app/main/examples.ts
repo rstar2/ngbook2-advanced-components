@@ -11,27 +11,17 @@ import { LifecycleSampleApp4 } from "../lifecycle-hooks/lifecycle_04";
 import { LifecycleSampleApp3 } from "../lifecycle-hooks/lifecycle_03";
 import { ForTemplateSampleApp } from "../templates/for";
 import { IfTemplateSampleApp } from "../templates/if";
-import { IntroComponent } from "./intro_component";
+import { IntroComponent } from "./intro";
 import { TransclusionSampleApp } from "../transclusion/transclusion";
 import { OnPushChangeDetectionSampleApp } from "../change-detection/onpush";
 import { ObservableChangeDetectionSampleApp } from "../change-detection/observables";
+import { ExampleApp } from "./example-app";
 
-/*
- * We've got a ton of examples in this project. This interface defines the
- * structure of a single example.
- */
-export interface ExampleDef {
-  label: string;  // link label
-  name: string;   // route name of the example
-  path: string;   // route path
-  component: any; // component class
-  dev?: boolean;  // is it an intermediate step?
-}
 
 /*
  * Here's the master list of our examples for this chapter.
  */
-export const EXAMPLES: ExampleDef[] = [
+export const EXAMPLES: ExampleApp[] = [
   {label: 'Intro', name: 'Root', path: '', component: IntroComponent},
   {label: 'Styling', name: 'Styling', path: 'styling', component: StyleSampleApp},
   {label: 'Modifying the Host (Step 1)', name: 'Host1', path: 'host-step-1', component: HostSampleApp1, dev: true},

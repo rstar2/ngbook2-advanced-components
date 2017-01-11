@@ -8,7 +8,7 @@ import { SidebarItemComponent, SidebarComponent } from "./main/sidebar";
 import { ObservableCmp, ObservableChangeDetectionSampleApp } from "./change-detection/observables";
 import { OnPushCmp, DefaultCmp, OnPushChangeDetectionSampleApp } from "./change-detection/onpush";
 import { TransclusionSampleApp, Message } from "./transclusion/transclusion";
-import { IntroComponent } from "./main/intro_component";
+import { IntroComponent } from "./main/intro";
 import { HashLocationStrategy, LocationStrategy, CommonModule } from "@angular/common";
 import { AppRoutesModule } from "./routes/app-routes.module";
 import { HostSampleAppModule } from "./host/host";

@@ -14,7 +14,7 @@ import {
   Router,
   ActivatedRoute
 } from '@angular/router';
-import { ExampleDef } from './example';
+import { ExampleApp } from './example-app';
 
 /*
  * SidebarItemComponent
@@ -34,7 +34,7 @@ import { ExampleDef } from './example';
   `
 })
 export class SidebarItemComponent {
-  @Input('item') item: ExampleDef;
+  @Input('item') item: ExampleApp;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -65,6 +65,6 @@ export class SidebarItemComponent {
   `
 })
 export class SidebarComponent {
-  @Input('items') items: ExampleDef[];
+  @Input('items') items: ExampleApp[];
 }
 

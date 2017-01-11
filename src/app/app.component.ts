@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
-import { ExampleDef, EXAMPLES } from "./main/example";
+import { EXAMPLES } from "./main/examples";
+import { ExampleApp } from "./main/example-app";
 
 @Component({
   selector: 'advanced-components-app',
@@ -33,7 +34,7 @@ import { ExampleDef, EXAMPLES } from "./main/example";
   `
 })
 export class AdvancedComponentsApp {
-  examples: ExampleDef[];
+  examples: ExampleApp[];
 
   constructor() {
     this.examples = EXAMPLES;
